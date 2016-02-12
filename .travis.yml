@@ -11,11 +11,10 @@ php:
   - hhvm
 
 before_script:
-  - git clone https://github.com/libssh2/libssh2.git && cd libssh2 && autoconf && ./configure && make && make install
   - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - yes "" | pecl install -f ssh2-beta
   - phpenv config-rm xdebug.ini
-  - composer self-update && composer install --dev --prefer-source --no-interaction
+  - composer self-update && composer install --dev --prefer-source --no-interaction --ignore-platform-reqs
+  - cp tests/Gaufrette/Functional/adapters/DoctrineDbal.php.dist tests/Gaufrette/Functional/adapters/DoctrineDbal.php -f
 
 script:
   - php bin/phpspec run -fpretty --verbose
