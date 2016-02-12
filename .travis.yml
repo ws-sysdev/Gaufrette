@@ -1,5 +1,7 @@
 language: php
 
+sudo: false
+
 php:
   - 5.3
   - 5.4
@@ -9,9 +11,11 @@ php:
   - hhvm
 
 before_script:
-  - ./bin/configure_test_env.sh
+  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - yes "" | pecl install -f ssh2-beta
+  - phpenv config-rm xdebug.ini
   - composer self-update && composer install --dev --prefer-source --no-interaction
 
 script:
   - php bin/phpspec run -fpretty --verbose
-  - bin/phpunit
+  - php bin/phpunit
