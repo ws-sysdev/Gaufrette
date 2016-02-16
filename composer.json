@@ -60,11 +60,6 @@
     "autoload": {
         "psr-0": { "Gaufrette": "src/" }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.4.x-dev"
-        }
-    },
     "config": {
         "bin-dir": "bin"
     }
